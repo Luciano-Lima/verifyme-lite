@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# VerifyMe Lite
 
-## Getting Started
+A lightweight identity verification (KYC) demo built with **Next.js (App Router)**, **TypeScript**, and **Prisma ORM**.  
+The project implements a multi-step onboarding flow with server-side validation, database-backed session auth, file uploads, and an admin review panel — all without client-side fetch or third-party auth libraries.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## What is KYC?
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+KYC (**Know Your Customer**) is a mandatory identity verification process used by banks, fintech apps, and online platforms to prevent fraud, fake accounts, and money laundering.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Typical KYC flow:
+1. Collect personal information  
+2. Upload identity document (passport, ID card, driver’s licence)  
+3. Upload selfie or live face scan  
+4. Manual or automated review → approved or rejected  
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project implements a simplified version of that flow using modern full-stack React patterns.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Tech Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Next.js (App Router)** — server-first React architecture  
+- **TypeScript** — static typing across frontend + backend  
+- **Prisma ORM** — typed database client  
+- **SQLite (dev)** with optional Postgres deployment  
+- **Server Actions** — direct mutations without REST API endpoints  
+- **Zod** — form/data validation  
+- **Tailwind CSS** — UI styling  
+- **bcrypt + HttpOnly cookies** — password hashing + sessions (no NextAuth)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Features
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- User authentication with session cookies  
+- Multi-step KYC wizard (personal → documents → selfie → review)  
+- File uploads stored locally (can be swapped for S3)  
+- Admin dashboard for approval / rejection  
+- Database-backed audit log  
+- Uses server components by default, client components only where needed  
+- Cache-revalidation using `revalidateTag` for instant UI updates  
+- Avoids client-side data fetching — logic stays on the server
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Folder Structure (high level)
+
